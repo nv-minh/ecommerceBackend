@@ -23,7 +23,6 @@ class Database {
         maxPoolSize: 50,
       })
       .then((_) => {
-        console.log("connected mongodb success PRO", countConnect());
         console.log(`mongodb://0.0.0.0:${port}/${name}`);
       })
       .catch((error) => console.log(error));
