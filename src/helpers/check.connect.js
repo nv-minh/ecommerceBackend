@@ -6,8 +6,8 @@ const process = require("process");
 const _SECONDS = 10000;
 // count connect
 const countConnect = () => {
-  const numConnection = mongoose.connections.length;
-  console.log(`Number of connections: ${numConnection}`);
+  // const numConnection = mongoose.connections.length;
+  // console.log(`Number of connections: ${numConnection}`);
   return numConnection;
 };
 
