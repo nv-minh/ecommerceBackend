@@ -29,3 +29,6 @@ J
 src/router/access/index.js,e\c\ec858caf407d00d260ffbb8d10020ac2ee4a853d
 N
 src/services/access.service.js,0\d\0d5e7e472d82dd8b3f0a5f48587218fb34317810
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
