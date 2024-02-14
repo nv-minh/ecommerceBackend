@@ -20,6 +20,7 @@ const apiKey = async (req, res, next) => {
         message: "Forbidden Error",
       });
     }
+    req.objKey = objKey
     return next();
   } catch (error) {
     console.log(error);
@@ -28,6 +29,8 @@ const apiKey = async (req, res, next) => {
 
 const permission = (permission) => {
   return (req, res, next) => {
+    console.log("1",req.objKey)
+
     if (!req.objKey.permissions) {
       return res.status(403).json({
         message: "permission denied",
@@ -39,6 +42,7 @@ const permission = (permission) => {
         message: "permission denied",
       });
     }
+    return next()
   };
 };
 
