@@ -1,14 +1,21 @@
-const app = require("./src/app");
-require("dotenv").config();
-const configs = require("./src/configs/config.mongodb");
-const PORT = configs.app.port;
-const server = app.listen(PORT, () => {
-  console.log(`WSV eCommerce start with port: ${PORT}`);
+require('dotenv').config()
+const nodeEnv = process.env.NODE_ENV;
+
+// config dotenv by environment
+require('dotenv').config({
+    path: `.env.${nodeEnv}`
+})
+
+console.log(process.env.PORT)
+const PORT = process.env.PORT || 3055;
+
+// start server nodejs
+const app = require('./src/app');
+const server =  app.listen(PORT, () => {
+    console.log(`eCommerce start with ${PORT}`);
 });
 
-process.on("SIGINT", () => {
-  server.close(() => {
-    console.log(`Exit Server Express`);
-    process.exit(0);
-  });
+process.on('SIGINT', () => {
+    server.close('Exit server express');
+    // notify send (ping....)
 });

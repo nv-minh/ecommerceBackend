@@ -1,32 +1,28 @@
-"use strict";
+const accessService = require('../services/access.service')
+const catchAsync = require('../helpers/catch.async')
+const {CREATED, OK} = require("../core/success.response");
 
-const AccessService = require("../services/access.service");
-const { OK, CREATED, SuccessResponse} = require("../core/success.response");
 class AccessController {
 
-  logout = async (req, res,next)=>{
-    new SuccessResponse({
-      message:'Logout success!',
-      metadata: await AccessService.logout(req.keyStore)
-    }).send(res)
-  }
+    login = catchAsync(async (req, res) => {
+        OK(res, "Login success", await accessService.singIn(req.body))
+    })
 
-  login = async (req,res,next)=>{
-     new SuccessResponse({
-      metadata: await AccessService.login((req.body))
-    }).send(res)
-  }
-  signUp = async (req, res, next) => {
-    try {
-      const metadata = await AccessService.signUp(req.query);
-      new CREATED({
-        message: "Registered OK!",
-        metadata: metadata,
-      }).send(res);
-    } catch (error) {
-      next(error); // Chuyển ngoại lệ cho xử lý lỗi tiếp theo
-    }
-  };
+    refreshToken = catchAsync(async (req, res) => {
+        OK(res, "Get token success", await accessService.refreshToken({
+            refreshToken: req.refreshToken,
+            user: req.user,
+            keyStore: req.keyStore
+        }))
+    })
+
+    logout = catchAsync(async (req, res) => {
+        OK(res, "Logout success", await accessService.logout(req.keyStore))
+    })
+
+    signUp = catchAsync(async (req, res) => {
+        CREATED(res, "Register success", await accessService.signUp(req.body))
+    })
 }
 
-module.exports = new AccessController();
+module.exports = new AccessController()
