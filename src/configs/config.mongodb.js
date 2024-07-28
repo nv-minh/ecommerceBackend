@@ -1,8 +1,7 @@
 const local = {
     app: {
         port: process.env.PORT
-    },
-    db: {
+    }, db: {
         host: process.env.MONGO_HOST,
         port: process.env.MONGO_PORT,
         name: process.env.MONGO_DATABASE,
@@ -14,8 +13,7 @@ const local = {
 const uat = {
     app: {
         port: process.env.PORT
-    },
-    db: {
+    }, db: {
         host: process.env.MONGO_HOST,
         port: process.env.MONGO_PORT,
         name: process.env.MONGO_DATABASE,
@@ -26,5 +24,4 @@ const uat = {
 
 const config = {local, uat}
 const env = process.env.NODE_ENV || 'dev'
-
-module.exports = config[env]
+module.exports = config[env === 'dev' ? 'local' : 'uat']
